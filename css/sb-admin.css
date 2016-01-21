@@ -16,6 +16,9 @@ body {
         margin-top: 50px;
     }
 }
+#correciones{
+    display: none;
+}
 #recursos{
     display: none;
 }

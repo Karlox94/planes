@@ -129,33 +129,27 @@
                     <div class="col-lg-12">                    	
                         <form class="form" role="form" name="plan">
                             <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label  for="factor">Factor</label>
-                                    <input type="text" name="factor" class="form-control" id="factor" placeholder="Factor escogido anteriormente">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label  for="caracterisitca">Caracteristica</label>
-                                    <select class="form-control" id="caractersitica" name="caracteristica">
-                                        <option selected="selected" value="">Seleccione una opción</option>
-                                        <option value="car1">Caracteristica 1</option>
-                                        <option value="car2">Caracteristica 2</option>
-                                        <option value="car3">Caracteristica 3</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-12 ">
-                                    <label  for="debilidad">Debilidad / Oportunidad de Mejora</label>
+                                <div class="form-group col-md-8 ">
+                                    <label  for="noConformidad">No Conformidad</label>
                                     <textarea class="form-control" rows="5"></textarea>
                                 </div>
-                                <div class="form-group col-md-7">
-                                    <label  for="causaRaiz">Causa Raíz <small class="text-muted"> (Adjuntar metodología para su identificación)</small></label>
-                                    <textarea class="form-control" rows="4"></textarea>
-                                </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <div class="row">
                                         <div class="form-group col-md-12">
-                                            <label>Adjuntar Metodología</label>                                    
-                                            <input type="file" class="form-control" value="Adjuntar Metodología">
-                                        </div>                           
+                                            <label  for="origen">Origen</label>
+                                            <select class="form-control" id="origen" name="origen" onchange="mostrarCorrecciones();">
+                                                <option selected="selected" value="">Seleccione una opción</option>
+                                                <option value="Auditoria Interna de Calidad">Auditoria Interna de Calidad</option>
+                                                <option value="Auditoria Externa de Calidad">Auditoria Externa de Calidad</option>
+                                                <option value="Sistema de Peticiones, reclamos y sugerencias">Sistema de Peticiones, reclamos y sugerencias</option>
+                                                <option value="Análisis de Indicadores">Análisis de Indicadores</option>
+                                                <option value="Riesgos del proceso">Riesgos del proceso</option>
+                                                <option value="Revisión por la Dirección">SRevisión por la Dirección</option>
+                                                <option value="Servicio No Conforme">Servicio No Conforme</option>
+                                                <option value="Resultados de la encuesta de satisfacción">SResultados de la encuesta de satisfacción</option>
+                                                <option value="Otro">Otro…</option>
+                                            </select>
+                                        </div>
                                         <div class="form-group col-md-10 col-md-offset-2">
                                             <label  for="tipoAccion">Tipo de Acción</label>
                                             <select class="form-control" id="tipoAccion" name="tipoAccion">
@@ -165,12 +159,50 @@
                                                 <option value="mejora">Acción de Mejora</option>
                                             </select>
                                         </div>
-                                    </div>                                    
+                                    </div>
+                                </div> 
+                                <div class="col-md-12" id="correciones">
+                                    <div class="row">
+                                        <div class="form-group col-md-3" >
+                                            <label>Correción (es)</label>                                   
+                                            <a href="javascript:;" class="forget btn btn-success form-control" data-toggle="modal" data-target="#correcciones"><span class="glyphicon glyphicon-plus"></span> Agregar Correciones</a>
+                                        </div>
+                                        <div class="col-md-12">                                            
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                  <tr>
+                                                      <td>Actividad</td>                                                  
+                                                      <td>Fecha ejecución</td>
+                                                      <td>Responsable</td>
+                                                      <td>Modificar</td>
+                                                      <td>Eliminar</td>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <td colspan="8"><center><h1 class="text-muted">No hay correciones aún</h1></center></td>
+                                                  </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="form-group col-md-7">
+                                    <label  for="causaRaiz">Causa Raíz <small class="text-muted"> (Adjuntar metodología para su identificación)</small></label>
+                                    <textarea class="form-control" rows="4"></textarea>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label>Actividades</label>                                   
-                                    <a href="javascript:;" class="forget btn btn-success form-control" data-toggle="modal" data-target=".forget-modal"><span class="glyphicon glyphicon-plus"></span> Agregar actividad</a>
-                                </div>                                 
+                                <div class="col-md-5">
+                                    <label>Adjuntar Metodología</label>                                    
+                                    <input type="file" class="form-control" value="Adjuntar Metodología">  
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label>Actividades</label>                                   
+                                            <a href="javascript:;" class="forget btn btn-success form-control" data-toggle="modal" data-target="#actividades"><span class="glyphicon glyphicon-plus"></span> Agregar actividad</a>
+                                        </div>                                 
+                                    </div>
+                                </div>
                             </div>                                                       
                         </form>
                         <table class="table table-bordered col-md-12">
@@ -192,7 +224,7 @@
                               </tr>
                             </tbody>
                         </table>
-                        <button tyor="button" class="btn btn-lg btn-success center-block" disabled="disabled"> <span class="glyphicon glyphicon-plus"></span> Crear Caracteristica</button>
+                        <button tyor="button" class="btn btn-lg btn-success center-block" disabled="disabled"> <span class="glyphicon glyphicon-plus"></span> Crear No Conformidad</button>
                     </div>
                 </div>
                 <!-- /.row -->                    
@@ -200,7 +232,8 @@
             </div>
             <!-- /.container-fluid -->
 
-            <div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
+            <!-- modal actividades -->
+            <div class="modal fade forget-modal" id="actividades" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -360,6 +393,47 @@
                 </div> <!-- /.modal-dialog -->
             </div> <!-- /.modal -->
 
+            <!-- modal correciones -->
+            <div class="modal fade forget-modal" id="correcciones" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Cerrar</span>
+                            </button>
+                            <h4 class="modal-title">Agregar Correciones</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="actividad">Actividad</label>
+                                    <textarea class="form-control" id="actividad" rows="5" placeholder="¿Qué Hacer para eliminar la Causa Raíz y dar solución al problema?"></textarea> 
+                                </div> 
+                                <div class="col-md-6">
+                                    <label for="fechaEjecucion">Fecha de ejecución</label>
+                                    <input type="date" name="fechaEjecucion" class="form-control" id="fechaEjecucion">
+                                </div>                                  
+                                <div class="col-md-6">                   
+                                    <label for="responsable">Responsable</label>                                  
+                                    <select class="form-control" id="responsable" name="responsable">
+                                        <option selected="selected" value="">Seleccione una opción</option>
+                                        <option value="persona1">Persona1</option>
+                                        <option value="persona2">Persona2</option>
+                                        <option value="persona3">Persona3</option>
+                                        <option value="persona4">Persona4</option>
+                                    </select>
+                                </div>                                
+                            </div>                                
+                        </div>                    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-success">Agregar</button>
+                        </div>
+                    </div> <!-- /.modal-content -->
+                </div> <!-- /.modal-dialog -->
+            </div> <!-- /.modal -->
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -376,6 +450,18 @@
     <script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
     <script src="js/plugins/morris/morris-data.js"></script>
+    <script type="text/javascript">
+        function mostrarCorrecciones() {
+            element = document.getElementById("correciones");
+            option = document.getElementById("origen").value;            
+            if (option == "Auditoria Interna de Calidad" || option == "Auditoria Externa de Calidad") {
+                element.style.display='block';
+            }
+            else {
+                element.style.display='none';
+            }
+        }
+    </script>
     <script type="text/javascript">
         function mostrarRecursos() {
             element = document.getElementById("recursos");
